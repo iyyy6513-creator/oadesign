@@ -2,15 +2,21 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>OA DESIGN</title>
 <meta name="description" content="OA DESIGN — 인테리어 디자인 · 시공">
-<meta property="og:type" content="website">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta property="og:title" content="OA DESIGN">
 <meta property="og:description" content="OA DESIGN — 인테리어 디자인 · 시공">
-<meta property="og:image" content="img/landing.webp">
-<meta name="twitter:card" content="summary_large_image">
+<meta property="og:type" content="website">
+<meta property="og:image" content="img/01-31903be34c.webp">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231A1A1A'/%3E%3Ctext x='32' y='42' font-family='Helvetica,Arial' font-size='26' font-weight='700' fill='%23fff' text-anchor='middle'%3EOA%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="img/01-31903be34c.webp">
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="image" href="img/01-31903be34c.webp">
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css');
 
@@ -32,8 +38,6 @@ body{
 }
 body.locked{overflow:hidden;}
 img{display:block;}
-:focus{outline:2px solid var(--ink);outline-offset:2px;}
-:focus:not(:focus-visible){outline:none;}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px;}
 ::selection{background:var(--ink);color:#fff;}
 
@@ -73,9 +77,7 @@ nav a.active{color:var(--ink);font-weight:600;}
 /* ---------- landing : image only ---------- */
 .landing{
   position:relative;background:var(--bg);overflow:hidden;line-height:0;
-  height:calc(100vh - var(--head));
-  height:calc(100svh - var(--head));
-  min-height:240px;
+  height:calc(100svh - var(--head));min-height:240px;
 }
 .landing img{width:100%;height:100%;object-fit:contain;}
 .landing .down{
@@ -93,19 +95,23 @@ nav a.active{color:var(--ink);font-weight:600;}
 }
 .sec-hero h1{font-size:42px;font-weight:300;letter-spacing:6px;}
 .sec-hero h1 b{font-weight:700;}
+/* headline framed by hairlines — absorbs any phrase length without breaking balance */
+.sec-hero h1.ruled{
+  display:flex;align-items:center;gap:26px;max-width:860px;margin:0 auto;
+  font-size:25px;font-weight:300;letter-spacing:.08em;color:var(--muted);
+}
+.sec-hero h1.ruled::before,.sec-hero h1.ruled::after{content:"";flex:1;height:1px;background:var(--line);}
+.sec-hero h1.ruled span{white-space:nowrap;}
+.sec-hero h1.ruled b{font-weight:700;color:var(--ink);}
 
 /* ---------- project grid : 3 per row, tiles match the covers' 3:2 ratio ---------- */
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;padding:0 2px 2px;}
 .tile{
-  position:relative;overflow:hidden;cursor:pointer;
+  position:relative;aspect-ratio:3/2;overflow:hidden;cursor:pointer;
   background:var(--surface);border:none;padding:0;display:block;width:100%;
   font:inherit;color:inherit;text-align:left;
 }
-.tile::before{content:"";display:block;padding-top:66.667%;}   /* 3:2, works on every Safari */
-.tile .ph{
-  position:absolute;top:0;right:0;bottom:0;left:0;
-  transition:transform .5s cubic-bezier(.22,1,.36,1);
-}
+.tile .ph{position:absolute;inset:0;transition:transform .5s cubic-bezier(.22,1,.36,1);}
 .tile .ph img{width:100%;height:100%;object-fit:cover;}
 .tile:hover .ph{transform:scale(1.05);}
 .tile .info{
@@ -123,6 +129,13 @@ nav a.active{color:var(--ink);font-weight:600;}
   font-size:22px;font-weight:300;line-height:1.75;text-align:center;
   color:var(--ink);max-width:640px;margin:0 auto 64px;
 }
+.about-lede .oa{font-style:normal;font-weight:400;letter-spacing:.03em;white-space:nowrap;}
+.about-body{max-width:660px;margin:0 auto;text-align:center;}
+.about-body p{font-size:15px;line-height:2;color:#555;}
+.about-note{margin-top:34px;font-size:18px;font-weight:300;line-height:1.85;color:var(--ink);}
+.about-sign{max-width:660px;margin:56px auto 0;padding-top:34px;border-top:1px solid var(--line);
+  text-align:center;font-size:15px;font-weight:300;line-height:1.9;color:var(--muted);}
+.about-sign b{display:block;margin-top:8px;font-size:17px;font-weight:500;letter-spacing:.04em;color:var(--ink);}
 .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
 .col{border-top:1px solid var(--line);padding-top:22px;}
 .col .k{font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:10px;}
@@ -142,7 +155,7 @@ nav a.active{color:var(--ink);font-weight:600;}
 .info-list dd a:hover{text-decoration:underline;}
 form{display:grid;gap:16px;}
 .f2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-label{display:block;font-size:11px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:7px;}
+label{display:block;font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase;margin-bottom:7px;}
 input,textarea{
   width:100%;font:inherit;font-size:14px;color:var(--ink);
   background:none;border:none;border-bottom:1px solid var(--line);
@@ -150,6 +163,29 @@ input,textarea{
 }
 input:focus,textarea:focus{outline:none;border-bottom-color:var(--ink);}
 textarea{resize:vertical;min-height:86px;}
+label .req{color:#B4552E;margin-left:3px;}
+.unit{display:flex;align-items:baseline;gap:8px;}
+.unit input{flex:1;}
+.unit .u{flex:none;font-size:12px;color:var(--muted);}
+.tel3{display:flex;align-items:baseline;gap:8px;}
+.tel3 input{flex:1;text-align:center;}
+.tel3 .dash{flex:none;font-size:13px;color:var(--muted);}
+.picks{display:flex;flex-wrap:wrap;gap:10px 22px;padding:9px 0;}
+.picks label{display:inline-flex;align-items:center;gap:7px;margin:0;
+  font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink);cursor:pointer;}
+.picks input{width:14px;height:14px;flex:none;accent-color:var(--ink);border:none;padding:0;}
+.filebox{display:flex;align-items:center;gap:14px;padding:9px 0;border-bottom:1px solid var(--line);}
+.filebox label.pick{display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;flex:none;margin:0;border:1px solid var(--line);
+  font-size:20px;color:var(--muted);cursor:pointer;transition:border-color .2s ease,color .2s ease;}
+.filebox label.pick:hover{border-color:var(--ink);color:var(--ink);}
+.filebox input[type=file]{display:none;}
+.filebox .names{font-size:12px;line-height:1.6;color:var(--muted);}
+.agree{display:flex;align-items:center;gap:8px;margin:4px 0 0;font-size:13px;
+  letter-spacing:0;text-transform:none;color:var(--ink);}
+.agree input{width:14px;height:14px;flex:none;accent-color:var(--ink);padding:0;}
+.agree a{color:var(--ink);}
+.err{font-size:12px;color:#B4552E;min-height:1px;}
 .send{
   justify-self:start;margin-top:8px;font:inherit;font-size:13px;letter-spacing:2px;
   text-transform:uppercase;background:var(--ink);color:#fff;border:1px solid var(--ink);
@@ -205,12 +241,55 @@ footer{
   nav a{font-size:11px;letter-spacing:.5px;}
   .sec-hero{padding:60px 20px 36px;}
   .sec-hero h1{font-size:26px;letter-spacing:3px;}
+  .sec-hero h1.ruled{font-size:15px;letter-spacing:.03em;gap:12px;}
   .grid{grid-template-columns:repeat(2,1fr);}
-  .about-lede{font-size:18px;}
+  .about-lede{font-size:18px;margin-bottom:44px;}
+  .about-lede .oa{white-space:normal;}
+  .about-body p{font-size:14.5px;line-height:1.95;}
+  .about-note{font-size:16px;margin-top:26px;}
+  .about-sign{margin-top:40px;padding-top:26px;font-size:14px;}
+  .about-sign b{font-size:16px;}
   .stats{gap:40px;}
   .f2{grid-template-columns:1fr;}
   footer{flex-direction:column;gap:8px;padding:28px 20px;}
 }
+
+/* ---------- iPhone / touch tuning ---------- */
+html{-webkit-text-size-adjust:100%;}
+header{
+  padding-left:max(var(--pad),env(safe-area-inset-left));
+  padding-right:max(var(--pad),env(safe-area-inset-right));
+}
+footer{
+  padding-left:max(var(--pad),env(safe-area-inset-left));
+  padding-right:max(var(--pad),env(safe-area-inset-right));
+  padding-bottom:calc(40px + env(safe-area-inset-bottom));
+}
+.modal{-webkit-overflow-scrolling:touch;}
+/* on touch screens there is no hover: keep the project caption visible */
+@media (hover:none){
+  .tile .info{opacity:1;}
+  .tile:hover .ph{transform:none;}
+  .send:hover{background:var(--ink);color:#fff;}
+}
+@media (max-width:720px){
+  /* 16px prevents iOS Safari from zooming in when a field is focused */
+  input,textarea{font-size:16px;}
+  .modal{width:100vw;max-height:100svh;height:100svh;}
+  .modal .body{padding:24px 20px;}
+  .modal h2{font-size:20px;}
+  .modal .meta{gap:16px;flex-wrap:wrap;}
+  .modal .close{top:12px;transform:translateX(-44px);width:36px;height:36px;}
+  .stats{gap:28px;}
+  .stat b{font-size:28px;}
+}
+@media (max-width:420px){
+  .grid{grid-template-columns:1fr;}
+  .sec-hero h1{font-size:23px;letter-spacing:2px;}
+  .sec-hero h1.ruled{font-size:14px;letter-spacing:.02em;gap:10px;}
+  nav{gap:14px;}
+}
+
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
   *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
@@ -233,14 +312,14 @@ footer{
 <main id="top">
 
   <section class="landing">
-    <img src="img/landing.webp" width="1410" height="1232" alt="OA DESIGN 시공 사례">
+    <img src="img/01-31903be34c.webp" width="1410" height="1232" alt="OA DESIGN 시공 사례">
     <span class="down" aria-hidden="true"></span>
   </section>
 
   <section id="project">
     <div class="sec-hero">
       <div class="eyebrow">Project</div>
-      <h1>SPACE, <b>DEFINED</b></h1>
+      <h1 class="ruled"><span>Only for you, <b>Always with you</b></span></h1>
     </div>
     <div class="grid" id="grid"></div>
   </section>
@@ -248,39 +327,22 @@ footer{
   <section id="about">
     <div class="sec-hero">
       <div class="eyebrow">About</div>
-      <h1>OA <b>DESIGN</b></h1>
+      <h1 class="ruled"><span>OA <b>DESIGN</b></span></h1>
     </div>
     <div class="wrap">
-      <p class="about-lede">공간은 도면이 아니라 현장에서 완성됩니다.<br>보이는 마감보다 보이지 않는 공정을 먼저 챙깁니다.</p>
-      <div class="cols">
-        <div class="col">
-          <div class="k">01 / Design</div>
-          <h3>쓰는 사람에서 시작합니다</h3>
-          <p>동선과 생활 습관을 먼저 듣고 평면을 잡습니다. 유행하는 스타일보다 그 집에서 매일 반복되는 행동이 기준이 됩니다.</p>
-        </div>
-        <div class="col">
-          <div class="k">02 / Build</div>
-          <h3>보이지 않는 곳을 지킵니다</h3>
-          <p>철거·설비·전기처럼 나중에 손댈 수 없는 공정에 시간을 더 씁니다. 공정별 사진과 일정은 진행 중에 공유합니다.</p>
-        </div>
-        <div class="col">
-          <div class="k">03 / Finish</div>
-          <h3>손이 닿는 높이를 봅니다</h3>
-          <p>문 손잡이, 스위치, 상부장 아래처럼 매일 만지는 부분의 마감 상태로 공사의 완성도를 판단합니다.</p>
-        </div>
+      <p class="about-lede">OA디자인의 ‘OA’에는<br><span class="oa">Only for you, Always with you</span>라는 의미가 담겨 있습니다.<br>오직 당신을 위한 공간을 만들고,<br>언제나 그 공간에서 살아갈 사람을 생각한다는 뜻입니다.</p>
+      <div class="about-body">
+        <p>같은 구조의 집이라도 그 안에 사는 사람의 취향과 생활 방식은 모두 다릅니다. OA디자인은 유행을 그대로 따라가기보다 고객의 이야기를 먼저 듣고, 일상에 가장 편안하고 자연스럽게 어울리는 공간을 설계합니다.</p>
+        <p class="about-note">공간을 단순히 꾸미는 것을 넘어,<br>오랫동안 나답게 살아갈 수 있는 집을 만드는 것.</p>
       </div>
-      <div class="stats">
-        <div class="stat"><b>-</b><span>Since</span></div>
-        <div class="stat"><b>-</b><span>Projects</span></div>
-        <div class="stat"><b>-</b><span>A/S</span></div>
-      </div>
+      <p class="about-sign">오직 당신을 위해, 언제나 당신의 일상과 함께.<b>OA디자인입니다.</b></p>
     </div>
   </section>
 
   <section id="contact">
     <div class="sec-hero">
       <div class="eyebrow">Contact</div>
-      <h1>GET IN <b>TOUCH</b></h1>
+      <h1 class="ruled"><span>GET IN <b>TOUCH</b></span></h1>
     </div>
     <div class="wrap">
       <div class="contact-grid">
@@ -293,16 +355,93 @@ footer{
         </dl>
         <form id="form" onsubmit="return false;">
           <div class="f2">
-            <div><label for="f-name">성함</label><input id="f-name" type="text" autocomplete="name"></div>
-            <div><label for="f-tel">연락처</label><input id="f-tel" type="tel" autocomplete="tel"></div>
+            <div>
+              <label for="f-name">성함<span class="req">*</span></label>
+              <input id="f-name" type="text" autocomplete="name" placeholder="성함을 입력해주세요">
+            </div>
+            <div>
+              <label for="f-tel2">연락처<span class="req">*</span></label>
+              <div class="tel3">
+                <input id="f-tel1" type="tel" inputmode="numeric" maxlength="3" value="010" aria-label="연락처 앞자리">
+                <span class="dash">–</span>
+                <input id="f-tel2" type="tel" inputmode="numeric" maxlength="4" placeholder="0000" aria-label="연락처 가운데자리">
+                <span class="dash">–</span>
+                <input id="f-tel3" type="tel" inputmode="numeric" maxlength="4" placeholder="0000" aria-label="연락처 끝자리">
+              </div>
+            </div>
           </div>
+
           <div class="f2">
-            <div><label for="f-addr">현장 위치</label><input id="f-addr" type="text"></div>
-            <div><label for="f-size">평형</label><input id="f-size" type="text" placeholder="예: 34평"></div>
+            <div>
+              <label for="f-addr">주소<span class="req">*</span></label>
+              <input id="f-addr" type="text" placeholder="의뢰 공간 주소를 입력해주세요">
+            </div>
+            <div>
+              <label for="f-addr2">상세 주소 (선택)</label>
+              <input id="f-addr2" type="text" placeholder="동·호수 등">
+            </div>
           </div>
-          <div><label for="f-msg">문의 내용</label><textarea id="f-msg"></textarea></div>
-          <button class="send" id="send" type="button">Send</button>
-          <p class="hint">버튼을 누르면 입력한 내용이 담긴 메일 작성 창이 열립니다.</p>
+
+          <div class="f2">
+            <div>
+              <label for="f-start">공사 시작일<span class="req">*</span></label>
+              <input id="f-start" type="date">
+            </div>
+            <div>
+              <label for="f-budget">공사 예산<span class="req">*</span></label>
+              <div class="unit">
+                <input id="f-budget" type="text" inputmode="numeric" placeholder="예산을 입력해주세요">
+                <span class="u">만원</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="f2">
+            <div>
+              <label for="f-area">평수<span class="req">*</span></label>
+              <div class="unit">
+                <input id="f-area" type="text" inputmode="decimal" placeholder="평수를 입력해주세요">
+                <span class="u">평</span>
+              </div>
+            </div>
+            <div>
+              <label>면적 기준<span class="req">*</span></label>
+              <div class="picks">
+                <label><input type="radio" name="areaType" value="공급" checked>공급</label>
+                <label><input type="radio" name="areaType" value="전용">전용</label>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <label>OA디자인을 알게 된 경로<span class="req">*</span></label>
+            <div class="picks" id="f-route">
+              <label><input type="checkbox" value="블로그">블로그</label>
+              <label><input type="checkbox" value="인스타그램">인스타그램</label>
+              <label><input type="checkbox" value="유튜브">유튜브</label>
+              <label><input type="checkbox" value="검색">검색</label>
+              <label><input type="checkbox" value="추천">추천</label>
+            </div>
+          </div>
+
+          <div>
+            <label for="f-msg">공사 내용</label>
+            <textarea id="f-msg" placeholder="희망하는 공사 내용을 입력해주세요"></textarea>
+          </div>
+
+          <div>
+            <label for="f-files">참고 사진 (도면 등 최대 5장)</label>
+            <div class="filebox">
+              <label class="pick" for="f-files" aria-label="참고 사진 선택">+</label>
+              <input id="f-files" type="file" accept="image/*,.pdf" multiple>
+              <span class="names" id="f-filenames">선택된 파일 없음</span>
+            </div>
+          </div>
+
+          <label class="agree"><input id="f-agree" type="checkbox">개인정보처리방침 동의<span class="req">*</span></label>
+          <p class="err" id="f-err"></p>
+          <button class="send" id="send" type="button">신청하기</button>
+          <p class="hint">버튼을 누르면 입력한 내용이 담긴 메일 작성 창이 열립니다. 참고 사진은 열린 메일 창에 직접 첨부해 주세요.</p>
         </form>
       </div>
     </div>
@@ -322,40 +461,40 @@ footer{
 const projects = [
   { title: "신규 현장", loc: "-", area: "-", type: "아파트",
     desc: "베이지·오크 톤으로 바닥부터 벽까지 색을 이어 붙인 공간. 정원이 보이는 통창 앞에 곡선 소파를 두고, 침실은 단을 올려 간접조명으로 마감했습니다.",
-    thumb: "img/p1-cover.webp", thumb_w: 1000, thumb_h: 666,
-    images: ["img/p1-cover.webp", "img/p1-01.webp", "img/p1-02.webp", "img/p1-03.webp", "img/p1-04.webp", "img/p1-05.webp", "img/p1-06.webp", "img/p1-07.webp", "img/p1-08.webp"] },
+    thumb: "img/02-b5fdaf49f4.webp", thumb_w: 1000, thumb_h: 666,
+    images: ["img/02-b5fdaf49f4.webp", "img/03-da8ee3dfa9.webp", "img/04-cb55a4d0b2.webp", "img/05-27cd788fd7.webp", "img/06-7326799570.webp", "img/07-b888581aee.webp", "img/08-98e5237ab5.webp", "img/09-1bb17dc8e9.webp", "img/10-e470f8cc71.webp"] },
   { title: "상무지구 갤러리303", loc: "광주 서구", area: "-", type: "아파트",
     desc: "화이트 톤 계단실과 우드 현관, 트래버틴 욕실까지 소재 대비로 완성한 갤러리형 공간.",
-    thumb: "img/p2-cover.webp", thumb_w: 1250, thumb_h: 833,
-    images: ["img/p2-cover.webp", "img/p2-01.webp", "img/p2-02.webp", "img/p2-03.webp", "img/p2-04.webp", "img/p2-05.webp", "img/p2-06.webp", "img/p2-07.webp", "img/p2-08.webp"] },
+    thumb: "img/11-223d82c078.webp", thumb_w: 1250, thumb_h: 833,
+    images: ["img/11-223d82c078.webp", "img/12-76827d2683.webp", "img/13-55747899cb.webp", "img/14-44591000e1.webp", "img/15-15111751ef.webp", "img/16-3244f1f33f.webp", "img/17-9b12136144.webp", "img/18-102ee5c3f9.webp", "img/19-73440da036.webp"] },
   { title: "수완지구 대방3차", loc: "광주 광산구", area: "-", type: "아파트",
     desc: "대리석 패턴 아일랜드 다이닝과 트래버틴 욕실·파우더룸까지 소재감을 살린 공간.",
-    thumb: "img/p3-cover.webp", thumb_w: 1250, thumb_h: 834,
-    images: ["img/p3-cover.webp", "img/p3-01.webp", "img/p3-02.webp", "img/p3-03.webp", "img/p3-04.webp", "img/p3-05.webp", "img/p3-06.webp", "img/p3-07.webp", "img/p3-08.webp"] },
+    thumb: "img/20-214f3fe48e.webp", thumb_w: 1250, thumb_h: 834,
+    images: ["img/20-214f3fe48e.webp", "img/21-da31b9567a.webp", "img/22-98e751411e.webp", "img/23-4aa7923c01.webp", "img/24-2bad24b4bd.webp", "img/25-4c1808d851.webp", "img/26-4e9bddcc62.webp", "img/27-c2852ac615.webp", "img/28-fae0993798.webp"] },
   { title: "수완지구 대방6차", loc: "광주 광산구", area: "-", type: "아파트",
     desc: "오크 우드톤 아일랜드 주방과 오픈 선반, 우드 슬라이딩 도어로 완성한 다이닝 중심 공간.",
-    thumb: "img/p4-cover.webp", thumb_w: 1250, thumb_h: 834,
-    images: ["img/p4-cover.webp", "img/p4-01.webp", "img/p4-02.webp", "img/p4-03.webp", "img/p4-04.webp", "img/p4-05.webp", "img/p4-06.webp", "img/p4-07.webp", "img/p4-08.webp"] },
+    thumb: "img/29-f1e7ddc914.webp", thumb_w: 1250, thumb_h: 834,
+    images: ["img/29-f1e7ddc914.webp", "img/30-cdc3fb0fc1.webp", "img/31-bc6bc2a155.webp", "img/32-464b2351d1.webp", "img/33-a025091b71.webp", "img/34-030c9612fd.webp", "img/35-f5cb4c8f37.webp", "img/36-601b3b6125.webp", "img/37-23c4986c0c.webp"] },
   { title: "수완지구 현진에버빌1차", loc: "광주 광산구", area: "-", type: "아파트",
     desc: "대리석톤 아일랜드 다이닝과 부클레 소파 거실, 트래버틴 욕실까지 소재 대비를 살린 공간.",
-    thumb: "img/p5-cover.webp", thumb_w: 1250, thumb_h: 834,
-    images: ["img/p5-cover.webp", "img/p5-01.webp", "img/p5-02.webp", "img/p5-03.webp", "img/p5-04.webp", "img/p5-05.webp", "img/p5-06.webp", "img/p5-07.webp", "img/p5-08.webp"] },
+    thumb: "img/38-e07a8e452e.webp", thumb_w: 1250, thumb_h: 834,
+    images: ["img/38-e07a8e452e.webp", "img/39-a9197211e5.webp", "img/40-119fc119ac.webp", "img/41-27c819ebe1.webp", "img/42-f33307654d.webp", "img/43-a54d438278.webp", "img/44-a7fee25772.webp", "img/45-75b126c4c1.webp", "img/46-7fbea0d7ab.webp"] },
   { title: "수완지구 대방3차 (2)", loc: "광주 광산구", area: "-", type: "아파트",
     desc: "클래식한 몰딩과 모던한 가구가 어우러진 절충형 스타일.",
-    thumb: "img/p6-cover.webp", thumb_w: 1500, thumb_h: 1001,
-    images: ["img/p6-cover.webp", "img/p6-01.webp", "img/p6-02.webp", "img/p6-03.webp", "img/p6-04.webp", "img/p6-05.webp", "img/p6-06.webp", "img/p6-07.webp", "img/p6-08.webp"] },
+    thumb: "img/47-ef1dde49ee.webp", thumb_w: 1500, thumb_h: 1001,
+    images: ["img/47-ef1dde49ee.webp", "img/48-7efac69698.webp", "img/49-10abb618af.webp", "img/50-5462d1dd98.webp", "img/51-1117d368d7.webp", "img/52-a46d1dfa2e.webp", "img/53-c3a33b8983.webp", "img/54-8c43a6fa07.webp", "img/55-0abf46b1dc.webp"] },
   { title: "수완지구 자이", loc: "광주 광산구", area: "-", type: "아파트",
     desc: "화이트와 오크 톤을 중심으로 한 미니멀 공간. 아일랜드 주방과 우드 슬라이딩 도어로 동선과 분위기를 정리했습니다.",
-    thumb: "img/p7-cover.webp", thumb_w: 1250, thumb_h: 834,
-    images: ["img/p7-cover.webp", "img/p7-01.webp", "img/p7-02.webp", "img/p7-03.webp", "img/p7-04.webp", "img/p7-05.webp", "img/p7-06.webp", "img/p7-07.webp", "img/p7-08.webp"] },
+    thumb: "img/56-9c0849b787.webp", thumb_w: 1250, thumb_h: 834,
+    images: ["img/56-9c0849b787.webp", "img/57-94b0eac5c3.webp", "img/58-3fd51184e6.webp", "img/59-fc460af40b.webp", "img/60-1e9b318bae.webp", "img/61-66df68d002.webp", "img/62-2d6cdc0cf7.webp", "img/63-5bd12eecca.webp", "img/64-fa0eb01d92.webp"] },
   { title: "원흥 A아파트", loc: "-", area: "37평", type: "아파트",
     desc: "사진 준비 중입니다.",
-    thumb: "img/p8-cover.webp", thumb_w: 1600, thumb_h: 1200,
-    images: ["img/p8-cover.webp"] },
+    thumb: "img/65-8313d18cf8.webp", thumb_w: 1600, thumb_h: 1200,
+    images: ["img/65-8313d18cf8.webp"] },
   { title: "광장 B아파트", loc: "-", area: "75평", type: "아파트",
     desc: "사진 준비 중입니다.",
-    thumb: "img/p9-cover.webp", thumb_w: 1500, thumb_h: 1000,
-    images: ["img/p9-cover.webp"] }
+    thumb: "img/66-e506568bd3.webp", thumb_w: 1500, thumb_h: 1000,
+    images: ["img/66-e506568bd3.webp"] }
 ];
 
 /* ---- landing fits the screen exactly, whatever the header height ---- */
@@ -393,7 +532,7 @@ projects.forEach(function(p, idx){
   el.type = 'button';
   el.setAttribute('aria-label', p.title + ' 자세히 보기');
   el.innerHTML =
-    '<div class="ph"><img src="' + p.thumb + '" width="' + p.thumb_w + '" height="' + p.thumb_h + '" alt="' + p.title + '" decoding="async"' + (idx > 2 ? ' loading="lazy"' : '') + '></div>' +
+    '<div class="ph"><img src="' + p.thumb + '" width="' + p.thumb_w + '" height="' + p.thumb_h + '" alt="' + p.title + '" decoding="async"' + (idx > 1 ? ' loading="lazy"' : '') + '></div>' +
     '<div class="info"><div class="cat">' + p.type + '</div><div class="ttl">' + p.title + '</div></div>';
   el.addEventListener('click', function(){ openModal(idx); });
   grid.appendChild(el);
@@ -419,7 +558,7 @@ function openModal(idx){
       '<p class="desc">' + p.desc + '</p>' +
     '</div>' +
     '<div class="scroll-gallery">' +
-      (p.images.length ? p.images.map(function(src){ return '<img src="' + src + '" alt="' + p.title + '">'; }).join('')
+      (p.images.length ? p.images.map(function(src, i){ return '<img src="' + src + '" alt="' + p.title + '" decoding="async"' + (i ? ' loading="lazy"' : '') + '>'; }).join('')
                        : '<p class="soon">상세 사진은 준비 중입니다.</p>') +
     '</div>';
   opener = document.querySelectorAll('.tile')[idx];
@@ -457,14 +596,69 @@ document.addEventListener('keydown', function(e){
 })();
 
 /* ---- contact form -> mail draft ---- */
-document.getElementById('send').addEventListener('click', function(){
+(function(){
   var v = function(id){ return document.getElementById(id).value.trim(); };
-  var body = ['성함: ' + v('f-name'), '연락처: ' + v('f-tel'), '현장 위치: ' + v('f-addr'),
-              '평형: ' + v('f-size'), '', '문의 내용:', v('f-msg')].join('\n');
-  location.href = 'mailto:hello@oadesign.kr?subject=' +
-    encodeURIComponent('[홈페이지 문의] ' + (v('f-name') || '이름 미입력')) +
-    '&body=' + encodeURIComponent(body);
-});
+  var err = document.getElementById('f-err');
+  var files = document.getElementById('f-files');
+  var fileNames = document.getElementById('f-filenames');
+
+  files.addEventListener('change', function(){
+    var list = Array.prototype.slice.call(files.files, 0, 5);
+    if (files.files.length > 5) {
+      err.textContent = '참고 사진은 최대 5장까지 선택할 수 있습니다. 앞의 5장만 기록됩니다.';
+    } else { err.textContent = ''; }
+    fileNames.textContent = list.length ? list.map(function(f){ return f.name; }).join(', ')
+                                        : '선택된 파일 없음';
+  });
+
+  document.getElementById('send').addEventListener('click', function(){
+    var tel = [v('f-tel1'), v('f-tel2'), v('f-tel3')].filter(Boolean).join('-');
+    var routes = Array.prototype.slice.call(document.querySelectorAll('#f-route input:checked'))
+                      .map(function(c){ return c.value; });
+    var areaType = (document.querySelector('input[name=areaType]:checked') || {}).value || '';
+
+    var missing = [];
+    if (!v('f-name')) missing.push('성함');
+    if (!(v('f-tel2') && v('f-tel3'))) missing.push('연락처');
+    if (!v('f-addr')) missing.push('주소');
+    if (!v('f-start')) missing.push('공사 시작일');
+    if (!v('f-budget')) missing.push('공사 예산');
+    if (!v('f-area')) missing.push('평수');
+    if (!routes.length) missing.push('알게 된 경로');
+    if (missing.length) {
+      err.textContent = missing.join(', ') + ' 항목을 입력해주세요.';
+      return;
+    }
+    if (!document.getElementById('f-agree').checked) {
+      err.textContent = '개인정보처리방침에 동의해주세요.';
+      return;
+    }
+    err.textContent = '';
+
+    var picked = Array.prototype.slice.call(files.files, 0, 5)
+                      .map(function(f){ return f.name; });
+    var addr = v('f-addr') + (v('f-addr2') ? ' ' + v('f-addr2') : '');
+
+    var body = [
+      '성함: ' + v('f-name'),
+      '연락처: ' + tel,
+      '주소: ' + addr,
+      '공사 시작일: ' + v('f-start'),
+      '공사 예산: ' + v('f-budget') + ' 만원',
+      '평수: ' + v('f-area') + ' 평 (' + areaType + ')',
+      '알게 된 경로: ' + routes.join(', '),
+      '',
+      '공사 내용:',
+      (v('f-msg') || '(미입력)'),
+      '',
+      '참고 사진: ' + (picked.length ? picked.join(', ') + ' — 이 메일에 직접 첨부해 주세요.' : '없음')
+    ].join('\n');
+
+    location.href = 'mailto:hello@oadesign.kr?subject=' +
+      encodeURIComponent('[홈페이지 상담신청] ' + v('f-name')) +
+      '&body=' + encodeURIComponent(body);
+  });
+})();
 </script>
 </body>
 </html>
